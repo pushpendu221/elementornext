@@ -1,5 +1,3 @@
-import { parse } from 'node-html-parser';
-
 export const getPost = async(uri) =>{
     const params = {
         query:`

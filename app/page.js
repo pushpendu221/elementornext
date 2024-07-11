@@ -8,8 +8,6 @@ export default async function Home() {
   // }
  // console.log("HERE",{data});
   return (
-    <div>
       <BlockRenderer blocks={data.post} />
-    </div>
   );
 }

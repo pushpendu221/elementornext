@@ -5,51 +5,44 @@ import { Section } from "component/Section";
 import { Widget } from "component/Widget";
 
 export const BlockRenderer = ({ blocks }) => {
-  //  console.log("props",{blocks});
-  const elementorData = JSON.parse(blocks.elementorData);
-  console.log("props", elementorData);
-  const Page = elementorData.map((row) => {
-    // console.log({ row });
-    return (
-      <section key={row.id} className="row">
-        {row.elements.map((column) => {
+    console.log("props1",{blocks});
+    let elementorData=blocks;
+    if(blocks.elementorData){
+      elementorData = JSON.parse(blocks.elementorData);
+    }
+  //console.log("props", elementorData);
+  return( elementorData.map((row) => {
+     //console.log({ row });
           // console.log({ column });
-          return (
-            <div
-              key={column.id}
-              className={`col-${column.settings._column_size}`}
-            >
-              {column.elements.map((widget) => {
                // console.log({ widget });
-                switch(widget.elType){
+                switch(row.elType){
                   case 'section':
                   {
+                  //  console.log("blCoks",blockstr);
                     return(
-                      <Section key={widget.id} section={widget.elements} />
+                      <section key={row.id} className="row">
+                          <BlockRenderer key={row.id} blocks={row.elements} />
+                      </section>
                     )
                   }
                   case 'column':
                     {
-                      return(
-                        <Column key={widget.id} column={widget.elements} />
+                      return( 
+                        <div key={row.id} className={`col-${row.settings._column_size}`}>
+                            <BlockRenderer key={row.id} blocks={row.elements} />
+                        </div>
                       )
                     }
                   case 'widget':
                     {
                       return(
-                        <Widget key={widget.id} widget={widget.elements} />
+                        <Widget key={row.id} widget={row.elements} />
                       )
                     }  
                   default:
-                    console.log("unknown", widget);
+                    console.log("unknown", row);
                     return null;
                 }
-              })}
-            </div>
-          );
-        })}
-      </section>
-    );
-  });
-  return <div>{Page}</div>;
+  }));
+  // return {Page};
 };

@@ -1,13 +1,14 @@
 "use client";
+import { Section } from "component/Section";
 import { Widget } from "component/Widget";
 
 export const BlockRenderer = ({ blocks }) => {
-  //  console.log("props1",{blocks});
+  //console.log("props",{blocks});
     let elementorData=blocks;
     if(blocks.elementorData){
       elementorData = JSON.parse(blocks.elementorData);
     }
-  //console.log("props", elementorData);
+  console.log("props", elementorData);
   return( elementorData.map((row) => {
      //console.log({ row });
           switch(row.elType){
@@ -15,13 +16,20 @@ export const BlockRenderer = ({ blocks }) => {
             {
             //  console.log("blCoks",blockstr);
               return(
-                <section key={row.id} className="row">
+                <Section key={row.id} 
+                  backgroundImageUrl= {row.settings.background_image ? row.settings.background_image : {} }
+                  background_repeat={row.settings.background_repeat ? row.settings.background_repeat: {}}
+                  background_size={row.settings.background_size ? row.settings.background_size: {}}
+                  margin={row.settings?.margin}
+                  padding={row.settings?.padding}
+                  >
                     <BlockRenderer key={row.id} blocks={row.elements} />
-                </section>
+                </Section>
               )
             }
             case 'column':
               {
+                   console.log("column",row);
                 return( 
                   <div key={row.id} className={`col-${row.settings._column_size}`}>
                       <BlockRenderer key={row.id} blocks={row.elements} />

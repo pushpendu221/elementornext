@@ -5,7 +5,6 @@ export const getPost = async(uri) =>{
             post(id: "/", idType: URI) {
                 title
                 uri
-                slug
                 elementorData
             }
             }

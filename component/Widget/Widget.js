@@ -4,7 +4,7 @@ import { Image } from "./Image";
 import { TextEditor } from "./TextEditor";
 
 export const Widget = ({widget}) => {
-    console.log("Widget",widget);
+   // console.log("Widget",widget);
     switch(widget.widgetType)
     {
         case 'heading': {

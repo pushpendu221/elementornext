@@ -2,7 +2,7 @@
 import { Widget } from "component/Widget";
 
 export const BlockRenderer = ({ blocks }) => {
-    console.log("props1",{blocks});
+  //  console.log("props1",{blocks});
     let elementorData=blocks;
     if(blocks.elementorData){
       elementorData = JSON.parse(blocks.elementorData);
@@ -32,7 +32,7 @@ export const BlockRenderer = ({ blocks }) => {
               {
                 return(
                   <div key={row.id} className="widget-class">
-                  <BlockRenderer key={row.id} blocks={row.elements} />
+                  <Widget key={row.id} widget={row} />
                  </div>
                 )
               }  

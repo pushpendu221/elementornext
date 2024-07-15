@@ -1,4 +1,5 @@
 "use client";
+import { Column } from "component/Column";
 import { Section } from "component/Section";
 import { Widget } from "component/Widget";
 
@@ -20,8 +21,8 @@ export const BlockRenderer = ({ blocks }) => {
                   backgroundImageUrl= {row.settings.background_image ? row.settings.background_image : {} }
                   background_repeat={row.settings.background_repeat ? row.settings.background_repeat: {}}
                   background_size={row.settings.background_size ? row.settings.background_size: {}}
-                  margin={row.settings?.margin}
-                  padding={row.settings?.padding}
+                  margin={row.settings.margin ? row.settings.margin : {}}
+                  padding={row.settings.padding ? row.settings.margin : {}}
                   >
                     <BlockRenderer key={row.id} blocks={row.elements} />
                 </Section>
@@ -31,9 +32,11 @@ export const BlockRenderer = ({ blocks }) => {
               {
                    console.log("column",row);
                 return( 
-                  <div key={row.id} className={`col-${row.settings._column_size}`}>
+                  <Column key={row.id} 
+                  className={`col-${row.settings._column_size}`}
+                  >
                       <BlockRenderer key={row.id} blocks={row.elements} />
-                  </div>
+                  </Column>
                 )
               }
             case 'widget':

@@ -1,7 +1,7 @@
 export const Column = ({column}) => {
     return(
-        <div>
-            Column
+        <div style={{ display: 'flex' }}>
+            Columns
         </div>
     )
 }

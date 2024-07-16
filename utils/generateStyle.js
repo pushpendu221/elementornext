@@ -1,13 +1,7 @@
-import React from "react";
-import { convertPxToRem, isEmptyObject } from "utils/convertPxtoRem";
+import { convertPxToRem, isEmptyObject } from "./convertPxtoRem";
 
-export const Heading = ({blocks}) => {
-   //console.log("heading",{blocks});
+export const generateStyle = ({blocks}) => {
    const align = blocks.settings.align ? {'text-align': blocks.settings.align} : 'left';
-   const header_size_opening = blocks.settings.header_size ? blocks.settings.header_size : 'p';
-   const title = blocks.settings.title ? blocks.settings.title : '';
-   const title_color = blocks.settings.title_color ? {color:blocks.settings.title_color} : '#fff';
-   const font = blocks.settings.typography_font_family ? blocks.settings.typography_font_family : '#fff';
    const font_size = blocks.settings.typography_font_size;
    const fontSizeString = font_size ? `${convertPxToRem(font_size.size,font_size.unit)}` : '';
    const fontSizeStyle = isEmptyObject(font_size) ? {} : { 'font-size': fontSizeString };
@@ -21,15 +15,15 @@ export const Heading = ({blocks}) => {
    const paddingString = padding ? `${convertPxToRem(padding.top,padding.unit)} ${convertPxToRem(padding.right,padding.unit)} ${convertPxToRem(padding.bottom,padding.unit)} ${convertPxToRem(padding.left,padding.unit)}` : {};
    const paddingStyle = isEmptyObject(paddingString) ? {} : { padding: paddingString };
    
-   const style = {
-      ...line_height,
-      ...title_color,
-      ...align,
-      ...fontSizeStyle,
-      ...font_weight,
-      ...paddingStyle,
-      ...marginStyle
-    };
-
-    return React.createElement(header_size_opening, { style }, title);
-}
+   return {
+    align,
+    fontSizeString,
+    fontSizeStyle,
+    font_weight,
+    line_height,
+    marginString,
+    marginStyle,
+    paddingString,
+    paddingStyle
+};
+};

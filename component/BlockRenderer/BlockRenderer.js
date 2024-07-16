@@ -33,7 +33,8 @@ export const BlockRenderer = ({ blocks }) => {
                    console.log("column",row);
                 return( 
                   <Column key={row.id} 
-                  className={`col-${row.settings._column_size}`}
+                  padding={row.settings.padding ? row.settings.margin : {}}
+                  columnSize={row.settings._column_size}
                   >
                       <BlockRenderer key={row.id} blocks={row.elements} />
                   </Column>

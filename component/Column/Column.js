@@ -1,7 +1,8 @@
-export const Column = ({column}) => {
+export const Column = ({children,columnSize}) => {
     return(
-        <div style={{ display: 'flex' }}>
-            Columns
+        <div>
+            {children}
         </div>
     )
+    
 }

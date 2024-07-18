@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 
+/* styles/fonts.css */
+@font-face {
+  font-family: 'Recoleta';
+  src: url('/public/font/Recoleta-Regular.eot') format('eot'),
+       url('/public/font/Recoleta-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Recoleta';
+  src: url('/public/font/URWGeometric-Regular.eot') format('eot'),
+       url('/public/font/URWGeometric-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

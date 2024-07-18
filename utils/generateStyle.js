@@ -15,7 +15,7 @@ export const generateStyle = ({blocks}) => {
    const paddingString = padding ? `${convertPxToRem(padding.top,padding.unit)} ${convertPxToRem(padding.right,padding.unit)} ${convertPxToRem(padding.bottom,padding.unit)} ${convertPxToRem(padding.left,padding.unit)}` : {};
    const paddingStyle = isEmptyObject(paddingString) ? {} : { padding: paddingString };
    const font = blocks.settings.typography_font_family ? {'font-family':blocks.settings.typography_font_family} : {'font-family':'sans-serif'};
-
+   const bg_color = blocks.settings.background_color ? {'background-color': blocks.settings.background_color } : '';
    return {
     ...font,
     ...align,
@@ -23,6 +23,7 @@ export const generateStyle = ({blocks}) => {
     ...font_weight,
     ...line_height,
     ...marginStyle,
-    ...paddingStyle
+    ...paddingStyle,
+    ...bg_color
 };
 };

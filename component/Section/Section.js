@@ -1,8 +1,8 @@
 export const Section = ({children,backgroundImageUrl, background_repeat,background_size, margin, padding}) => {
     // console.log("backgroundImageUrl", backgroundImageUrl);
     const backgroundImage = backgroundImageUrl.url ? {'backgroundImage': `url(${backgroundImageUrl.url})`} : {};
-    const backroundrepeat = background_repeat ? {backgroundRepeat : background_repeat} : {};
-    const backgroundSize = background_size ? {backgroundSize : background_size} : {};
+    const backroundrepeat = background_repeat ? {'background-repeat' : background_repeat} : {};
+    const backgroundSize = background_size ? {'background-size' : background_size} : {};
    //console.log("padd", padding);
     // Conversion factor from px to rem
     const pxToRemFactor = 16;
@@ -24,8 +24,8 @@ export const Section = ({children,backgroundImageUrl, background_repeat,backgrou
     const paddingStyle = isEmptyObject(padding) ? {} : { padding: paddingString };
 
     return(
-        <div style={{...backgroundImage,...backroundrepeat,...backgroundSize, ...marginStyle, ...paddingStyle,width:""}}> 
+        <section style={{...backgroundImage,...backroundrepeat,...backgroundSize, ...marginStyle, ...paddingStyle,width:""}}> 
             {children}
-        </div>
+        </section>
     )
 }

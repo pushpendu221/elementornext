@@ -3,8 +3,8 @@ export const getPost = async(uri) =>{
         query:`
             query pageQuery {
             post(id: "/", idType: URI) {
-                title
                 uri
+                title
                 elementorData
             }
             }

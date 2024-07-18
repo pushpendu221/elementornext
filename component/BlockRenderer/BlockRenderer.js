@@ -30,7 +30,7 @@ export const BlockRenderer = ({ blocks }) => {
             }
             case 'column':
               {
-                   console.log("column",row);
+                   //console.log("column",row);
                 return( 
                   <Column key={row.id} 
                   padding={row.settings.padding ? row.settings.margin : {}}
@@ -43,9 +43,7 @@ export const BlockRenderer = ({ blocks }) => {
             case 'widget':
               {
                 return(
-                  <div key={row.id} className="widget-class">
                   <Widget key={row.id} widget={row} />
-                 </div>
                 )
               }  
             default:

@@ -11,21 +11,27 @@ export const BlockRenderer = ({ blocks }) => {
     }
   console.log("props", elementorData);
   return( elementorData.map((row) => {
-     //console.log({ row });
+    // console.log("rows",{ row });
+     const {background_image,background_repeat,background_size } = row.settings;
+     console.log('background_image',background_image);
+     const backgroundImageUrl = background_image ? {'backgroundImage': `url(${background_image.url})`} : {};
+     const backroundrepeat = background_repeat ? {'background-repeat' : background_repeat} : {};
+     const backgroundSize = background_size ? {'background-size' : background_size} : {};
+    const style = {
+      ...backgroundImageUrl,
+      ... backroundrepeat,
+      ...backgroundSize
+     }
           switch(row.elType){
             case 'section':
             {
-            //  console.log("blCoks",blockstr);
+              
+             console.log("blCoks",row.id);
               return(
-                <Section key={row.id} 
-                  backgroundImageUrl= {row.settings.background_image ? row.settings.background_image : {} }
-                  background_repeat={row.settings.background_repeat ? row.settings.background_repeat: {}}
-                  background_size={row.settings.background_size ? row.settings.background_size: {}}
-                  margin={row.settings.margin ? row.settings.margin : {}}
-                  padding={row.settings.padding ? row.settings.margin : {}}
-                  >
-                    <BlockRenderer key={row.id} blocks={row.elements} />
-                </Section>
+                <section style={style} key={row.id}>
+                  <Section rows={row.elements} key={row.id} />
+                </section>
+
               )
             }
             case 'column':

@@ -1,6 +1,8 @@
 import { Button } from "./Button";
 import { Heading } from "./Heading";
 import { Image } from "./Image";
+import { Imagebox } from "./ImageBox";
+import { Testimonials } from "./TestimonialCarousel";
 import { TextEditor } from "./TextEditor";
 
 export const Widget = ({widget}) => {
@@ -36,14 +38,14 @@ export const Widget = ({widget}) => {
         case 'image-box': {
             return(
                 <div>
-                    <Image blocks={widget}/>
+                    <Imagebox blocks={widget}/>
                 </div>
             )
         } 
         case 'testimonial-carousel': {
             return(
                 <div>
-                    <Image blocks={widget}/>
+                    <Testimonials blocks={widget}/>
                 </div>
             )
         } 

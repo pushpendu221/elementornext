@@ -1,8 +1,8 @@
 export const Image = ({blocks}) => {
-      console.log("image",{blocks});
+     // console.log("image",{blocks});
 
       const url = blocks.settings.image ? blocks.settings.image.url : '';
-      console.log("images",url);
+    //  console.log("images",url);
       const alt = blocks.settings.image ? blocks.settings.image.alt : '';
       const { width, align, padding } = blocks.settings;
       const widthStyle = width ? `${width.size}${width.unit}` : '100%';

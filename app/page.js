@@ -9,6 +9,16 @@ export default async function Home() {
  // console.log("HERE",{data});
   return (
     <div>
+      <style>{`
+        
+        .section-container{
+            display: flex;
+            margin-right: auto;
+            margin-left: auto;
+            position: relative;
+            max-width:1120px;
+        }
+      `}</style>
       <BlockRenderer blocks={data.post} />
       </div>
   );

@@ -1,7 +1,9 @@
 "use client";
-import { Column } from "component/Column";
-import { Section } from "component/Section";
+// import { Column } from "component/Column";
+// import { Section } from "component/Section";
 import { Widget } from "component/Widget";
+import { convertPxToRem, isEmptyObject } from "utils/convertPxtoRem";
+
 
 export const BlockRenderer = ({ blocks }) => {
   //console.log("props",{blocks});
@@ -12,24 +14,35 @@ export const BlockRenderer = ({ blocks }) => {
   console.log("props", elementorData);
   return( elementorData.map((row) => {
     // console.log("rows",{ row });
-     const {background_image,background_repeat,background_size } = row.settings;
-     console.log('background_image',background_image);
+     const {background_image,background_repeat,background_size,margin,padding,_column_size,content_width} = row.settings;
+     console.log('padding',padding);
      const backgroundImageUrl = background_image ? {'backgroundImage': `url(${background_image.url})`} : {};
      const backroundrepeat = background_repeat ? {'background-repeat' : background_repeat} : {};
      const backgroundSize = background_size ? {'background-size' : background_size} : {};
+     const marginString = margin ? `${convertPxToRem(margin.top,margin.unit)} ${convertPxToRem(margin.right,margin.unit)} ${convertPxToRem(margin.bottom,margin.unit)} ${convertPxToRem(margin.left,margin.unit)}` : '';
+     const marginStyle = isEmptyObject(marginString) ? {} : { margin: marginString };
+     const paddingString = padding ? `${convertPxToRem(padding.top,padding.unit)} ${convertPxToRem(padding.right,padding.unit)} ${convertPxToRem(padding.bottom,padding.unit)} ${convertPxToRem(padding.left,padding.unit)}` : '';
+    // console.log('paddingString',paddingString);
+     const paddingStyle = isEmptyObject(paddingString) ? {} : { padding: paddingString };
+     const contentWidth = content_width ? { width:`${convertPxToRem(content_width.size,padding.unit)}`} : {};
+     const widthStyle = _column_size ? { width:`${_column_size}%`}:{ width:'100%'}
+     const width = isEmptyObject(contentWidth) ? widthStyle :contentWidth;
+
     const style = {
       ...backgroundImageUrl,
       ... backroundrepeat,
-      ...backgroundSize
+      ...backgroundSize,
+    //   ...marginStyle,
+      ...paddingStyle,
      }
           switch(row.elType){
             case 'section':
             {
-              
-             console.log("blCoks",row.id);
               return(
-                <section style={style} key={row.id}>
-                  <Section rows={row.elements} key={row.id} />
+                <section style={style} key={row.id} className={`nextsec_${row.id}`}>
+                  <div className="section-container">
+                      <BlockRenderer key={row.id} blocks={row.elements} />
+                 </div>
                 </section>
 
               )
@@ -38,12 +51,9 @@ export const BlockRenderer = ({ blocks }) => {
               {
                    //console.log("column",row);
                 return( 
-                  <Column key={row.id} 
-                  padding={row.settings.padding ? row.settings.margin : {}}
-                  columnSize={row.settings._column_size}
-                  >
+                    <div key={row.id} class={`nextcol_${row.id}`} style={widthStyle}>
                       <BlockRenderer key={row.id} blocks={row.elements} />
-                  </Column>
+                    </div>  
                 )
               }
             case 'widget':
